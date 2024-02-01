@@ -28,11 +28,14 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
       
+    - name: List .jar files
+      run: ls build/libs
+      
     - uses: Kir-Antipov/mc-publish@v3.3
       with:
         version-type: beta
         changelog-file: CHANGES
-        files: "build/libs/*.jar[!sources]"
+        files: build/libs/*.jar
         
         modrinth-featured: true
         modrinth-unfeature-mode: subset
