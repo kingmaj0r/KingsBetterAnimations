@@ -39,8 +39,8 @@
       "modrinth": "tHdAF0Io",
       "loaders": ["fabric", "quilt"],
       "dependencies": [
-        "geckolib@4.2(embedded)#(ignore:curseforge)",
-        "player-animator@1.0.2-rc1+1.20(embedded)#(ignore:curseforge)"
+        "geckolib(embedded)#(ignore:curseforge)",
+        "player-animator(embedded)#(ignore:curseforge)"
       ]
     }
   }
