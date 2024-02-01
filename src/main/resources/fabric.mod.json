@@ -25,9 +25,7 @@
   "depends": {
     "fabricloader": ">=0.13.0",
     "minecraft": ">=1.20",
-    "fabric-api": ">=0.83.0+1.20",
-    "geckolib": ">=4.2",
-    "player-animator": ">=1.0.2-rc1+1.20"
+    "fabric-api": ">=0.83.0+1.20"
   },
   "recommends": {
     "modmenu": "*"
@@ -39,7 +37,11 @@
     "mc-publish": {
       "curseforge": "968974",
       "modrinth": "tHdAF0Io",
-      "loaders": ["fabric", "quilt"]
+      "loaders": ["fabric", "quilt"],
+      "dependencies": [
+        "geckolib@4.2(embedded)#(ignore:curseforge)",
+        "player-animator@1.0.2-rc1+1.20(embedded)#(ignore:curseforge)"
+      ]
     }
   }
 }
