@@ -40,7 +40,7 @@
       "loaders": ["fabric", "quilt"],
       "dependencies": [
         "geckolib(embedded)#(ignore:curseforge)",
-        "player-animator(embedded)#(ignore:curseforge)"
+        "playeranimator(embedded)#(ignore:curseforge)"
       ]
     }
   }
