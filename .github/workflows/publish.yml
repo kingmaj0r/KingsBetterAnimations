@@ -1,0 +1,44 @@
+name: Publish mod
+
+on:
+  push:
+    branches:
+      - 'KingsBetterAnimations*'
+  pull_request:
+    branches:
+      - 'KingsBetterAnimations*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@ec92e829475ac0c2315ea8f9eced72db85bb337a
+
+    - name: Build with Gradle Wrapper
+      run: ./gradlew build
+      
+    - uses: Kir-Antipov/mc-publish@v3.3
+      with:
+        version-type: beta
+        changelog-file: CHANGES
+        files: "build/libs/*.jar[!sources]"
+        
+        modrinth-featured: true
+        modrinth-unfeature-mode: subset
+        modrinth-dependencies: |
+          gedNE4y2@1.0.2-rc1+1.20-fabric(embedded)
+          8BmcQJ2H@4.2(embedded)
+        modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+        
+        curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
