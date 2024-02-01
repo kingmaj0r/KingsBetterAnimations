@@ -31,11 +31,19 @@ jobs:
     - name: List .jar files
       run: ls build/libs
       
+    - name: Extract branch name
+      id: branch
+      run: |
+        BRANCH_NAME=$(echo ${{ github.ref }} | sed -n 's|^refs/heads/\(.*\)$|\1|p')
+        LAST_PART=$(echo $BRANCH_NAME | awk -F'-' '{print $NF}')
+        echo "::set-output name=version::$LAST_PART"
+      
     - uses: Kir-Antipov/mc-publish@v3.3
       with:
         version-type: beta
         changelog-file: CHANGES
-        files: build/libs/*.jar
+        version: ${{ steps.branch.outputs.version }}
+        files: build/libs/*.jar !build/libs/*-sources.jar
         
         modrinth-featured: true
         modrinth-unfeature-mode: subset
