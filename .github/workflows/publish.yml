@@ -43,7 +43,9 @@ jobs:
         changelog-file: CHANGES
         version: ${{ steps.version.outputs.version }}
         name: Kings Better Animations ${{ steps.version.outputs.version }}
-        files: build/libs/*-@(dev|sources|javadoc).jar
+        files: |
+          build/libs/!(*-@(dev|sources|javadoc)).jar
+          build/libs/*-@(dev|sources|javadocs).jar
         
         modrinth-featured: true
         modrinth-unfeature-mode: subset
