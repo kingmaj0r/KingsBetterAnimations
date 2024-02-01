@@ -31,25 +31,22 @@ jobs:
     - name: List .jar files
       run: ls build/libs
       
-    - name: Extract branch name
-      id: branch
+    - name: Extract version
+      id: version
       run: |
-          BRANCH_NAME=$(echo ${{ github.ref }} | sed -n 's|^refs/heads/\(.*\)$|\1|p')
-          LAST_PART=$(echo $BRANCH_NAME | awk -F'-' '{print $NF}')
-          echo "Last part of branch name: $LAST_PART"
+        VERSION=$(grep -oP '^mod_version=\K.*' gradle.properties)
+        echo "::set-output name=version::$VERSION"
       
     - uses: Kir-Antipov/mc-publish@v3.3
       with:
         version-type: beta
         changelog-file: CHANGES
-        version: ${{ steps.branch.outputs.version }}
-        files: build/libs/!(*-@(dev\|sources\|javadoc)).jar
+        version: ${{ steps.version.outputs.version }}
+        name: Kings Better Animations ${{ steps.version.outputs.version }}
+        files: build/libs/*!(*-@(dev|sources|javadoc)).jar
         
         modrinth-featured: true
         modrinth-unfeature-mode: subset
-        modrinth-dependencies: |
-          gedNE4y2@1.0.2-rc1+1.20-fabric(embedded)
-          8BmcQJ2H@4.2(embedded)
         modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
         
         curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
