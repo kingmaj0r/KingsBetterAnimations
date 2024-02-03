@@ -40,7 +40,7 @@ jobs:
     - uses: Kir-Antipov/mc-publish@v3.3
       with:
         version-type: beta
-        changelog-file: CHANGES
+        changelog-file: CHANGELOG.md
         version: ${{ steps.version.outputs.version }}
         name: Kings Better Animations ${{ steps.version.outputs.version }}
         files: |
